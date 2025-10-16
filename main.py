@@ -1,6 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import numpy as np
+import re
 
 # Tensorflow Model Prediction
 def model_prediction(test_image):
@@ -112,4 +113,13 @@ elif(app_mode == "Disease Recognition"):
     'Tomato___Tomato_Yellow_Leaf_Curl_Virus',
     'Tomato___Tomato_mosaic_virus',
     'Tomato___healthy']
-        st.success("Model is predicting it's a {}".format(class_name[result_index])) 
+        s = class_name[result_index]
+        words = re.split(r'_+', s)     # split wherever one or more underscores appear
+        words = [w for w in words if w]  # remove empty strings
+        for i in words:
+            if i=="healthy":
+                ans = "It's a Healthy Plant."
+                break
+            else:
+                ans = "It's not a Healthy Plant."
+        st.success(ans + " Model is predicting it's a {}".format(s)) 
