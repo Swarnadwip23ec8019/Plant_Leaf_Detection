@@ -118,8 +118,15 @@ elif(app_mode == "Disease Recognition"):
         words = [w for w in words if w]  # remove empty strings
         for i in words:
             if i=="healthy":
-                ans = "It's a Healthy Plant."
+                ans = "It's a Healthy Plant." 
                 break
             else:
                 ans = "It's not a Healthy Plant."
-        st.success(ans + " Model is predicting it's a {}".format(s)) 
+
+        if ans == "It's a Healthy Plant.":
+            st.success("✅ " + ans + " Model is predicting it's a {}".format(s))
+        else:
+            st.error("❌ " + ans + " Model is predicting it's a {}".format(s)) 
+ 
+
+
